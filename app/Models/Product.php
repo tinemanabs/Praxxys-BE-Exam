@@ -15,4 +15,9 @@ class Product extends Model
         'product_description',
         'product_date_time'
     ];
+
+    public function productImages()
+    {
+        return $this->belongsToMany(ProductImage::class);
+    }
 }

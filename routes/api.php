@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Product;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/products/all', function () {
-    $products = Product::all();
-    return response()->json(['products' => $products]);
-});
+Route::get('/products/all', [ProductsController::class, 'getAllProducts']);
+Route::post('/products/store', [ProductsController::class, 'store']);
+Route::post('/products/delete/{id}', [ProductsController::class, 'delete']);
