@@ -6,6 +6,7 @@
 
 require("./bootstrap");
 import "flowbite";
+import Vue2Editor from "vue2-editor";
 
 window.Vue = require("vue").default;
 
@@ -19,6 +20,7 @@ window.Vue = require("vue").default;
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.use(Vue2Editor);
 
 Vue.component(
     "example-component",
