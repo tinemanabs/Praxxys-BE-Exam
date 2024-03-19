@@ -57,8 +57,27 @@ class ProductsController extends Controller
             'product_description' => $request->product_description,
             'product_date_time' => Carbon::parse($request->product_date_time)->format('Y-m-d H:i:s')
         ]);
+
+        $product = Product::find($id);
+
+        if ($request->hasFile('product_images')) {
+            $images = $request->file('product_images');
+            foreach ($images as $img) {
+                $filename = $img->hashName();
+
+                $img->move(public_path('images/products'), $filename);
+
+                $productImages = ProductImage::create(['filename' => $filename]);
+
+                $product->productImages()->syncWithoutDetaching($productImages->id);
+            }
+        }
     }
 
+    public function removeImage($id)
+    {
+        ProductImage::find($id)->delete();
+    }
 
     public function delete($id)
     {

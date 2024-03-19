@@ -5367,6 +5367,22 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5380,6 +5396,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       product_category: '',
       product_description: '',
       product_images: [],
+      saved_images: [],
       product_date_time: '',
       hasError1: false,
       hasError2: false,
@@ -5407,6 +5424,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.product_category = this.product.product_category;
       this.product_description = this.product.product_description;
       this.product_date_time = this.product.product_date_time;
+      this.saved_images = this.product.product_images;
     }
   },
   methods: {
@@ -5439,6 +5457,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         this.product_images.push(e.target.files[i]);
       }
     },
+    removeImage: function removeImage(prodImageId) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/products/remove-image/".concat(prodImageId)).then(function (response) {
+        console.log(response.data);
+        location.reload();
+      }).error(function (error) {
+        console.log(error);
+      });
+    },
     submitForm: function submitForm() {
       var formdata = new FormData();
       formdata.append('id', this.product_id);
@@ -5446,6 +5472,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       formdata.append('product_category', this.product_category);
       formdata.append('product_description', this.product_description);
       formdata.append('product_date_time', this.product_date_time);
+      this.product_images.map(function (image) {
+        return formdata.append('product_images[]', image);
+      });
       console.log(_toConsumableArray(formdata));
       axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/products/update/".concat(this.product_id), formdata).then(function (response) {
         console.log(response.data);
@@ -45944,6 +45973,71 @@ var render = function () {
             _c("span", { staticClass: "font-medium" }, [_vm._v("Error!")]),
             _vm._v(" Please upload an image.\n        "),
           ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.saved_images.length != 0,
+                expression: "saved_images.length != 0",
+              },
+            ],
+          },
+          [
+            _c(
+              "label",
+              {
+                staticClass: "block mb-2 text-sm font-medium text-gray-900",
+                attrs: { for: "multiple_files" },
+              },
+              [_vm._v("Saved images")]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.saved_images, function (productImages) {
+              return _c(
+                "div",
+                { staticClass: "grid grid-cols-1 md:grid-cols-2 mb-6" },
+                [
+                  _c("img", {
+                    attrs: {
+                      src: "/images/products/" + productImages.filename,
+                      alt: "",
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex justify-center items-center" },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.removeImage(productImages.id)
+                            },
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Remove\n                    "
+                          ),
+                        ]
+                      ),
+                    ]
+                  ),
+                ]
+              )
+            }),
+          ],
+          2
         ),
         _vm._v(" "),
         _c("div", { staticClass: "mb-6" }, [

@@ -36,6 +36,22 @@
                 role="alert">
                 <span class="font-medium">Error!</span> Please upload an image.
             </div>
+
+            <div v-show="saved_images.length != 0">
+                <label class="block mb-2 text-sm font-medium text-gray-900" for="multiple_files">Saved images</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 mb-6" v-for="productImages in saved_images">
+                    <img :src="'/images/products/' + productImages.filename" alt="">
+                    <div class="flex justify-center items-center">
+
+                        <button type="button" @click="removeImage(productImages.id)"
+                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                            Remove
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="mb-6">
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="multiple_files">Upload
                     multiple files</label>
@@ -84,6 +100,7 @@ export default {
             product_category: '',
             product_description: '',
             product_images: [],
+            saved_images: [],
             product_date_time: '',
             hasError1: false,
             hasError2: false,
@@ -96,12 +113,13 @@ export default {
         }
     },
     mounted() {
-        if(this.product){
+        if (this.product) {
             this.product_id = this.product.id;
             this.product_name = this.product.product_name;
             this.product_category = this.product.product_category;
             this.product_description = this.product.product_description;
             this.product_date_time = this.product.product_date_time;
+            this.saved_images = this.product.product_images;
         }
     },
     methods: {
@@ -134,6 +152,16 @@ export default {
                 this.product_images.push(e.target.files[i])
             }
         },
+        removeImage(prodImageId) {
+            axios.post(`/api/products/remove-image/${prodImageId}`)
+                .then((response) => {
+                    console.log(response.data)
+                    location.reload()
+                })
+                .error((error) => {
+                    console.log(error)
+                })
+        },
         submitForm() {
             const formdata = new FormData();
 
@@ -142,6 +170,10 @@ export default {
             formdata.append('product_category', this.product_category)
             formdata.append('product_description', this.product_description)
             formdata.append('product_date_time', this.product_date_time)
+
+            this.product_images.map((image) => (
+                formdata.append('product_images[]', image)
+            ))
 
             console.log([...formdata])
 
