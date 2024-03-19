@@ -43,6 +43,23 @@ class ProductsController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $product = Product::with('productImages')->find($id);
+        return view('auth.features.products.edit', compact('product'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        Product::where('id', $id)->update([
+            'product_name' => $request->product_name,
+            'product_category' => $request->product_category,
+            'product_description' => $request->product_description,
+            'product_date_time' => Carbon::parse($request->product_date_time)->format('Y-m-d H:i:s')
+        ]);
+    }
+
+
     public function delete($id)
     {
         Product::find($id)->delete();

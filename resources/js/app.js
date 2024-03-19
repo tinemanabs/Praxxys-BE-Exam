@@ -34,7 +34,10 @@ Vue.component(
     "product-create",
     require("./components/ProductCreate.vue").default
 );
-
+Vue.component(
+    "product-edit",
+    require("./components/ProductEdit.vue").default
+)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

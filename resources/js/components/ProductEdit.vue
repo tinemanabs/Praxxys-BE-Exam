@@ -19,7 +19,8 @@
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Select Category</label>
                 <select v-model="product_category" id="category"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    <option v-for="category in categories" :value="category.value" :key="category.value">{{ category.label }}</option>
+                    <option v-for="category in categories" :value="category.value" :key="category.value">{{
+            category.label }}</option>
                 </select>
             </div>
 
@@ -73,15 +74,17 @@ import { VueEditor } from "vue2-editor";
 import axios from 'axios';
 
 export default {
+    props: ['product'],
 
     data() {
         return {
             currentStep: 1,
+            product_id: '',
             product_name: '',
             product_category: '',
             product_description: '',
             product_images: [],
-            product_date_time: new Date().toISOString().slice(0, 16),
+            product_date_time: '',
             hasError1: false,
             hasError2: false,
             categories: [ // This is just an example, you should load your categories dynamically
@@ -93,7 +96,13 @@ export default {
         }
     },
     mounted() {
-        console.log("Product Create Mounted")
+        if(this.product){
+            this.product_id = this.product.id;
+            this.product_name = this.product.product_name;
+            this.product_category = this.product.product_category;
+            this.product_description = this.product.product_description;
+            this.product_date_time = this.product.product_date_time;
+        }
     },
     methods: {
         cancelBtn() {
@@ -128,17 +137,15 @@ export default {
         submitForm() {
             const formdata = new FormData();
 
+            formdata.append('id', this.product_id)
             formdata.append('product_name', this.product_name)
             formdata.append('product_category', this.product_category)
             formdata.append('product_description', this.product_description)
-            this.product_images.map((image) => (
-                formdata.append('product_images[]', image)
-            ))
             formdata.append('product_date_time', this.product_date_time)
 
             console.log([...formdata])
 
-            axios.post('/api/products/store', formdata)
+            axios.post(`/api/products/update/${this.product_id}`, formdata)
                 .then((response) => {
                     console.log(response.data)
                     window.location.replace('/home')

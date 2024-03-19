@@ -76,7 +76,7 @@
                             {{ value.product_date_time }}
                         </td>
                         <td class="px-6 py-4">
-                            <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
+                            <button @click="editProduct(value.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
                             <button @click="deleteProduct(value.id)"
                                 class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</button>
                         </td>
@@ -150,6 +150,9 @@ export default {
             if (this.hasNextPage) {
                 this.currentPage++;
             }
+        },
+        editProduct(productId) {
+            window.location.replace(`/products/${productId}`)
         },
         deleteProduct(productId) {
             axios.post(`/api/products/delete/${productId}`)

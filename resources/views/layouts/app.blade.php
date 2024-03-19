@@ -48,10 +48,6 @@
                                     class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
                                     aria-current="page">Login</a>
                             </li>
-                            <li>
-                                <a href="{{ route('register') }}"
-                                    class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Register</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -152,7 +148,11 @@
                             </button>
                             <ul id="dropdown-example" class="hidden py-2 space-y-2">
                                 <li>
-                                    <a href="#"
+                                    <a href="{{ route('home') }}"
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('products.create') }}"
                                         class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Create</a>
                                 </li>
                             </ul>
