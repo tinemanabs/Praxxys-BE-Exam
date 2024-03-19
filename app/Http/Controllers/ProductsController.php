@@ -23,10 +23,10 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $product = Product::create([
-            'product_name' => $request->product_name,
-            'product_category' => $request->product_category,
-            'product_description' => $request->product_description,
-            'product_date_time' => Carbon::parse($request->product_date_time)->format('Y-m-d H:i:s')
+            'name' => $request->name,
+            'category' => $request->category,
+            'description' => $request->description,
+            'date_and_time' => Carbon::parse($request->date_and_time)->format('Y-m-d H:i:s')
         ]);
 
         if ($request->hasFile('product_images')) {
@@ -52,10 +52,10 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         Product::where('id', $id)->update([
-            'product_name' => $request->product_name,
-            'product_category' => $request->product_category,
-            'product_description' => $request->product_description,
-            'product_date_time' => Carbon::parse($request->product_date_time)->format('Y-m-d H:i:s')
+            'name' => $request->name,
+            'category' => $request->category,
+            'description' => $request->description,
+            'date_and_time' => Carbon::parse($request->date_and_time)->format('Y-m-d H:i:s')
         ]);
 
         $product = Product::find($id);

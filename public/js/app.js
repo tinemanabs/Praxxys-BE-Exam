@@ -5190,6 +5190,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 
 
 
@@ -5197,11 +5199,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   data: function data() {
     return {
       currentStep: 1,
-      product_name: '',
-      product_category: '',
-      product_description: '',
+      name: '',
+      category: '',
+      description: '',
       product_images: [],
-      product_date_time: new Date().toISOString().slice(0, 16),
+      date_and_time: new Date().toISOString().slice(0, 16),
       hasError1: false,
       hasError2: false,
       categories: [{
@@ -5228,7 +5230,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     nextStep: function nextStep() {
       if (this.currentStep == 1) {
-        if (this.product_name == '' || this.product_category == '' || this.product_description == '') {
+        if (this.name == '' || this.category == '' || this.description == '') {
           this.hasError1 = true;
         } else {
           this.hasError1 = false;
@@ -5254,13 +5256,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     submitForm: function submitForm() {
       var formdata = new FormData();
-      formdata.append('product_name', this.product_name);
-      formdata.append('product_category', this.product_category);
-      formdata.append('product_description', this.product_description);
+      formdata.append('name', this.name);
+      formdata.append('category', this.category);
+      formdata.append('description', this.description);
       this.product_images.map(function (image) {
         return formdata.append('product_images[]', image);
       });
-      formdata.append('product_date_time', this.product_date_time);
+      formdata.append('date_and_time', this.date_and_time);
       console.log(_toConsumableArray(formdata));
       axios__WEBPACK_IMPORTED_MODULE_1___default().post('/api/products/store', formdata).then(function (response) {
         console.log(response.data);
@@ -5381,6 +5383,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 
 
 
@@ -5390,12 +5394,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     return {
       currentStep: 1,
       product_id: '',
-      product_name: '',
-      product_category: '',
-      product_description: '',
+      name: '',
+      category: '',
+      description: '',
       product_images: [],
       saved_images: [],
-      product_date_time: '',
+      date_and_time: '',
       hasError1: false,
       hasError2: false,
       categories: [{
@@ -5416,10 +5420,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   mounted: function mounted() {
     if (this.product) {
       this.product_id = this.product.id;
-      this.product_name = this.product.product_name;
-      this.product_category = this.product.product_category;
-      this.product_description = this.product.product_description;
-      this.product_date_time = this.product.product_date_time;
+      this.name = this.product.name;
+      this.category = this.product.category;
+      this.description = this.product.description;
+      this.date_and_time = this.product.date_and_time;
       this.saved_images = this.product.product_images;
     }
   },
@@ -5429,7 +5433,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     nextStep: function nextStep() {
       if (this.currentStep == 1) {
-        if (this.product_name == '' || this.product_category == '' || this.product_description == '') {
+        if (this.name == '' || this.category == '' || this.description == '') {
           this.hasError1 = true;
         } else {
           this.hasError1 = false;
@@ -5464,10 +5468,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     submitForm: function submitForm() {
       var formdata = new FormData();
       formdata.append('id', this.product_id);
-      formdata.append('product_name', this.product_name);
-      formdata.append('product_category', this.product_category);
-      formdata.append('product_description', this.product_description);
-      formdata.append('product_date_time', this.product_date_time);
+      formdata.append('name', this.name);
+      formdata.append('category', this.category);
+      formdata.append('description', this.description);
+      formdata.append('date_and_time', this.date_and_time);
       this.product_images.map(function (image) {
         return formdata.append('product_images[]', image);
       });
@@ -5695,12 +5699,12 @@ __webpack_require__.r(__webpack_exports__);
       if (this.searchKeyword) {
         var keyword = this.searchKeyword.toLowerCase();
         filtered = filtered.filter(function (product) {
-          return product.product_name.toLowerCase().includes(keyword) || product.product_description.toLowerCase().includes(keyword);
+          return product.name.toLowerCase().includes(keyword) || product.description.toLowerCase().includes(keyword);
         });
       }
       if (this.selectedCategory) {
         filtered = filtered.filter(function (product) {
-          return product.product_category == _this2.selectedCategory;
+          return product.category == _this2.selectedCategory;
         });
       }
       return filtered;
@@ -45433,6 +45437,10 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("h4", { staticClass: "text-2xl font-bold mb-4" }, [
+      _vm._v("Create Product"),
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       {
@@ -45483,20 +45491,20 @@ var render = function () {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.product_name,
-                expression: "product_name",
+                value: _vm.name,
+                expression: "name",
               },
             ],
             staticClass:
               "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
             attrs: { type: "text", id: "default-input" },
-            domProps: { value: _vm.product_name },
+            domProps: { value: _vm.name },
             on: {
               input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.product_name = $event.target.value
+                _vm.name = $event.target.value
               },
             },
           }),
@@ -45519,8 +45527,8 @@ var render = function () {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.product_category,
-                  expression: "product_category",
+                  value: _vm.category,
+                  expression: "category",
                 },
               ],
               staticClass:
@@ -45536,7 +45544,7 @@ var render = function () {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.product_category = $event.target.multiple
+                  _vm.category = $event.target.multiple
                     ? $$selectedVal
                     : $$selectedVal[0]
                 },
@@ -45568,11 +45576,11 @@ var render = function () {
             _vm._v(" "),
             _c("vue-editor", {
               model: {
-                value: _vm.product_description,
+                value: _vm.description,
                 callback: function ($$v) {
-                  _vm.product_description = $$v
+                  _vm.description = $$v
                 },
-                expression: "product_description",
+                expression: "description",
               },
             }),
           ],
@@ -45671,20 +45679,20 @@ var render = function () {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.product_date_time,
-                expression: "product_date_time",
+                value: _vm.date_and_time,
+                expression: "date_and_time",
               },
             ],
             staticClass:
               "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
             attrs: { type: "datetime-local", id: "default-input" },
-            domProps: { value: _vm.product_date_time },
+            domProps: { value: _vm.date_and_time },
             on: {
               input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.product_date_time = $event.target.value
+                _vm.date_and_time = $event.target.value
               },
             },
           }),
@@ -45795,6 +45803,10 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("h4", { staticClass: "text-2xl font-bold mb-4" }, [
+      _vm._v("Edit Product"),
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       {
@@ -45845,20 +45857,20 @@ var render = function () {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.product_name,
-                expression: "product_name",
+                value: _vm.name,
+                expression: "name",
               },
             ],
             staticClass:
               "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
             attrs: { type: "text", id: "default-input" },
-            domProps: { value: _vm.product_name },
+            domProps: { value: _vm.name },
             on: {
               input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.product_name = $event.target.value
+                _vm.name = $event.target.value
               },
             },
           }),
@@ -45881,8 +45893,8 @@ var render = function () {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.product_category,
-                  expression: "product_category",
+                  value: _vm.category,
+                  expression: "category",
                 },
               ],
               staticClass:
@@ -45898,7 +45910,7 @@ var render = function () {
                       var val = "_value" in o ? o._value : o.value
                       return val
                     })
-                  _vm.product_category = $event.target.multiple
+                  _vm.category = $event.target.multiple
                     ? $$selectedVal
                     : $$selectedVal[0]
                 },
@@ -45930,11 +45942,11 @@ var render = function () {
             _vm._v(" "),
             _c("vue-editor", {
               model: {
-                value: _vm.product_description,
+                value: _vm.description,
                 callback: function ($$v) {
-                  _vm.product_description = $$v
+                  _vm.description = $$v
                 },
-                expression: "product_description",
+                expression: "description",
               },
             }),
           ],
@@ -46098,20 +46110,20 @@ var render = function () {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.product_date_time,
-                expression: "product_date_time",
+                value: _vm.date_and_time,
+                expression: "date_and_time",
               },
             ],
             staticClass:
               "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
             attrs: { type: "datetime-local", id: "default-input" },
-            domProps: { value: _vm.product_date_time },
+            domProps: { value: _vm.date_and_time },
             on: {
               input: function ($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.product_date_time = $event.target.value
+                _vm.date_and_time = $event.target.value
               },
             },
           }),
@@ -46412,7 +46424,7 @@ var render = function () {
                     [
                       _vm._v(
                         "\n                        " +
-                          _vm._s(value.product_name) +
+                          _vm._s(value.name) +
                           "\n                    "
                       ),
                     ]
@@ -46421,20 +46433,20 @@ var render = function () {
                   _c("td", { staticClass: "px-6 py-4" }, [
                     _vm._v(
                       "\n                        " +
-                        _vm._s(value.product_category) +
+                        _vm._s(value.category) +
                         "\n                    "
                     ),
                   ]),
                   _vm._v(" "),
                   _c("td", {
                     staticClass: "px-6 py-4",
-                    domProps: { innerHTML: _vm._s(value.product_description) },
+                    domProps: { innerHTML: _vm._s(value.description) },
                   }),
                   _vm._v(" "),
                   _c("td", { staticClass: "px-6 py-4" }, [
                     _vm._v(
                       "\n                        " +
-                        _vm._s(value.product_date_time) +
+                        _vm._s(value.date_and_time) +
                         "\n                    "
                     ),
                   ]),

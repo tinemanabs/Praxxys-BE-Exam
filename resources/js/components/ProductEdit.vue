@@ -1,5 +1,7 @@
 <template>
     <div>
+        <h4 class="text-2xl font-bold mb-4">Edit Product</h4>
+
         <div v-show="currentStep === 1" class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
             <div v-show="hasError1"
                 class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
@@ -10,14 +12,14 @@
             <div class="mb-6">
                 <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900">Product
                     Name</label>
-                <input v-model="product_name" type="text" id="default-input"
+                <input v-model="name" type="text" id="default-input"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             </div>
 
 
             <div class="w-full mx-auto mb-6">
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Select Category</label>
-                <select v-model="product_category" id="category"
+                <select v-model="category" id="category"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option v-for="category in categories" :value="category.value" :key="category.value">{{
             category.label }}</option>
@@ -26,7 +28,7 @@
 
             <div class="w-full mb-6">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                <vue-editor v-model="product_description" />
+                <vue-editor v-model="description" />
             </div>
         </div>
 
@@ -64,7 +66,7 @@
         <div v-show="currentStep === 3" class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
             <div class="mb-6">
                 <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900">Date and Time</label>
-                <input v-model="product_date_time" type="datetime-local" id="default-input"
+                <input v-model="date_and_time" type="datetime-local" id="default-input"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
             </div>
         </div>
@@ -96,12 +98,12 @@ export default {
         return {
             currentStep: 1,
             product_id: '',
-            product_name: '',
-            product_category: '',
-            product_description: '',
+            name: '',
+            category: '',
+            description: '',
             product_images: [],
             saved_images: [],
-            product_date_time: '',
+            date_and_time: '',
             hasError1: false,
             hasError2: false,
             categories: [ 
@@ -115,10 +117,10 @@ export default {
     mounted() {
         if (this.product) {
             this.product_id = this.product.id;
-            this.product_name = this.product.product_name;
-            this.product_category = this.product.product_category;
-            this.product_description = this.product.product_description;
-            this.product_date_time = this.product.product_date_time;
+            this.name = this.product.name;
+            this.category = this.product.category;
+            this.description = this.product.description;
+            this.date_and_time = this.product.date_and_time;
             this.saved_images = this.product.product_images;
         }
     },
@@ -128,7 +130,7 @@ export default {
         },
         nextStep() {
             if (this.currentStep == 1) {
-                if (this.product_name == '' || this.product_category == '' || this.product_description == '') {
+                if (this.name == '' || this.category == '' || this.description == '') {
                     this.hasError1 = true;
                 } else {
                     this.hasError1 = false;
@@ -166,10 +168,10 @@ export default {
             const formdata = new FormData();
 
             formdata.append('id', this.product_id)
-            formdata.append('product_name', this.product_name)
-            formdata.append('product_category', this.product_category)
-            formdata.append('product_description', this.product_description)
-            formdata.append('product_date_time', this.product_date_time)
+            formdata.append('name', this.name)
+            formdata.append('category', this.category)
+            formdata.append('description', this.description)
+            formdata.append('date_and_time', this.date_and_time)
 
             this.product_images.map((image) => (
                 formdata.append('product_images[]', image)

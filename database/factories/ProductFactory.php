@@ -27,10 +27,10 @@ class ProductFactory extends Factory
         $randomCategory = $categories[array_rand($categories)];
 
         return [
-            'product_name' => $this->faker->word,
-            'product_category' => $randomCategory['value'],
-            'product_description' => $this->faker->text,
-            'product_date_time' => $this->faker->dateTime,
+            'name' => $this->faker->word,
+            'category' => $randomCategory['value'],
+            'description' => $this->faker->text,
+            'date_and_time' => $this->faker->dateTime,
         ];
     }
 }

@@ -65,15 +65,15 @@
                     <tr class="bg-white border-b"
                         v-for="value in displayedProducts">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            {{ value.product_name }}
+                            {{ value.name }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ value.product_category }}
+                            {{ value.category }}
                         </td>
-                        <td class="px-6 py-4" v-html="value.product_description">
+                        <td class="px-6 py-4" v-html="value.description">
                         </td>
                         <td class="px-6 py-4">
-                            {{ value.product_date_time }}
+                            {{ value.date_and_time }}
                         </td>
                         <td class="px-6 py-4">
                             <button @click="editProduct(value.id)" class="font-medium text-blue-600 hover:underline">Edit</button>
@@ -194,14 +194,14 @@ export default {
             if (this.searchKeyword) {
                 const keyword = this.searchKeyword.toLowerCase();
                 filtered = filtered.filter(product => (
-                    product.product_name.toLowerCase().includes(keyword) ||
-                    product.product_description.toLowerCase().includes(keyword)
+                    product.name.toLowerCase().includes(keyword) ||
+                    product.description.toLowerCase().includes(keyword)
                 ))
             }
 
             if (this.selectedCategory) {
                 filtered = filtered.filter(product => (
-                    product.product_category == this.selectedCategory
+                    product.category == this.selectedCategory
                 ))
             }
 
