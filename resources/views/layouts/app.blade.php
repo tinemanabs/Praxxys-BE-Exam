@@ -24,14 +24,14 @@
 <body>
     <div id="app">
         @guest
-            <nav class="bg-white border-gray-200 dark:bg-gray-900">
+            <nav class="bg-white border-gray-200">
                 <div class="w-full flex flex-wrap items-center justify-between mx-auto p-4">
                     <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span>
                     </a>
                     <button data-collapse-toggle="navbar-default" type="button"
-                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                         aria-controls="navbar-default" aria-expanded="false">
                         <span class="sr-only">Open main menu</span>
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -42,10 +42,10 @@
                     </button>
                     <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                         <ul
-                            class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                            class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
                             <li>
                                 <a href="{{ route('login') }}"
-                                    class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                                    class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"
                                     aria-current="page">Login</a>
                             </li>
                         </ul>
@@ -60,13 +60,13 @@
         @endguest
 
         @auth
-            <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
                 <div class="px-3 py-3 lg:px-5 lg:pl-3">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center justify-start rtl:justify-end">
                             <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar"
                                 aria-controls="logo-sidebar" type="button"
-                                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
                                 <span class="sr-only">Open sidebar</span>
                                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -78,14 +78,14 @@
                             <a href="https://flowbite.com" class="flex ms-2 md:me-24">
                                 <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
                                 <span
-                                    class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
+                                    class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">Flowbite</span>
                             </a>
                         </div>
                         <div class="flex items-center">
                             <div class="flex items-center ms-3">
                                 <div>
                                     <button type="button"
-                                        class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                                        class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300"
                                         aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                         <span class="sr-only">Open user menu</span>
                                         <img class="w-8 h-8 rounded-full"
@@ -93,13 +93,13 @@
                                             alt="user photo">
                                     </button>
                                 </div>
-                                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
+                                <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow"
                                     id="dropdown-user">
                                     <div class="px-4 py-3" role="none">
-                                        <p class="text-sm text-gray-900 dark:text-white" role="none">
+                                        <p class="text-sm text-gray-900" role="none">
                                             {{ Auth::user()->name }}
                                         </p>
-                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
+                                        <p class="text-sm font-medium text-gray-900 truncate"
                                             role="none">
                                             {{ Auth::user()->email }}
                                         </p>
@@ -109,7 +109,7 @@
                                             <a href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
                                                       document.getElementById('logout-form').submit();"
-                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                 role="menuitem">Sign out</a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                 class="d-none">
@@ -125,15 +125,15 @@
             </nav>
 
             <aside id="logo-sidebar"
-                class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+                class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0"
                 aria-label="Sidebar">
-                <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+                <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
                     <ul class="space-y-2 font-medium">
                         <li>
                             <button type="button"
-                                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100"
                                 aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                     viewBox="0 0 18 21">
                                     <path
@@ -149,11 +149,11 @@
                             <ul id="dropdown-example" class="hidden py-2 space-y-2">
                                 <li>
                                     <a href="{{ route('home') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">Products</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('products.create') }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Create</a>
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100">Create</a>
                                 </li>
                             </ul>
                         </li>

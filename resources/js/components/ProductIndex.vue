@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex justify-between items-center mb-4">
-            <h4 class="text-2xl font-bold dark:text-white">Products List</h4>
+            <h4 class="text-2xl font-bold">Products List</h4>
             <button v-on:click="redirectCreate" type="button"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center me-2">
                 <svg class="w-5 h-5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -18,31 +18,31 @@
                 <select v-model="selectedCategory" id="category"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
                     <option value="">All Categories</option>
-                    <option v-for="category in categories" :value="category">{{ category }}</option>
+                    <option v-for="category in categories" :value="category.value">{{ category.label }}</option>
                 </select>
             </div>
 
             <div class="max-w-lg">
                 <label for="default-search"
-                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                    class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                     </div>
                     <input type="text" v-model="searchKeyword" id="default-search"
-                        class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Search" />
                 </div>
             </div>
         </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Name
@@ -62,9 +62,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    <tr class="bg-white border-b"
                         v-for="value in displayedProducts">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                             {{ value.product_name }}
                         </th>
                         <td class="px-6 py-4">
@@ -76,9 +76,9 @@
                             {{ value.product_date_time }}
                         </td>
                         <td class="px-6 py-4">
-                            <button @click="editProduct(value.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</button>
+                            <button @click="editProduct(value.id)" class="font-medium text-blue-600 hover:underline">Edit</button>
                             <button @click="deleteProduct(value.id)"
-                                class="font-medium text-red-600 dark:text-blue-500 hover:underline">Delete</button>
+                                class="font-medium text-red-600 hover:underline">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -89,7 +89,7 @@
 
         <div class="flex justify-between items-center mt-4">
             <buttton v-if="currentPage > 1" @click="prevPage"
-                class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
                 <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -100,7 +100,7 @@
             <span>Page {{ currentPage }}</span>
 
             <buttton v-if="hasNextPage" @click="nextPage"
-                class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
                 Next
                 <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="none" viewBox="0 0 14 10">
@@ -121,7 +121,12 @@ export default {
             searchKeyword: '',
             selectedCategory: '',
             products: [],
-            categories: ['c1', 'c2', 'c3', 'c4'], // Example categories
+            categories: [ 
+                { label: 'Category 1', value: 'C1' },
+                { label: 'Category 2', value: 'C2' },
+                { label: 'Category 3', value: 'C3' },
+                { label: 'Category 4', value: 'C4' },
+            ],
             currentPage: 1,
             itemsPerPage: 10, // Number of products per page
         }

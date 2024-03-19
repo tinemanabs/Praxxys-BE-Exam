@@ -17,11 +17,20 @@ class ProductFactory extends Factory
 
     public function definition()
     {
+        $categories = [
+            ['label' => 'Category 1', 'value' => 'C1'],
+            ['label' => 'Category 2', 'value' => 'C2'],
+            ['label' => 'Category 3', 'value' => 'C3'],
+            ['label' => 'Category 4', 'value' => 'C4'],
+        ];
+
+        $randomCategory = $categories[array_rand($categories)];
+
         return [
             'product_name' => $this->faker->word,
-            'product_category' => $this->faker->word,
+            'product_category' => $randomCategory['value'],
             'product_description' => $this->faker->text,
-            'product_date_time' => $this->faker->dateTime
+            'product_date_time' => $this->faker->dateTime,
         ];
     }
 }

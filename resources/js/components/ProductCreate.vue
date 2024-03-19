@@ -2,7 +2,7 @@
     <div>
         <div v-show="currentStep === 1" class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
             <div v-show="hasError1"
-                class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                 role="alert">
                 <span class="font-medium">Error!</span> Please complete the form.
             </div>
@@ -31,7 +31,7 @@
 
         <div v-show="currentStep === 2" class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow">
             <div v-show="hasError2"
-                class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50"
                 role="alert">
                 <span class="font-medium">Error!</span> Please upload an image.
             </div>
@@ -84,11 +84,11 @@ export default {
             product_date_time: new Date().toISOString().slice(0, 16),
             hasError1: false,
             hasError2: false,
-            categories: [ // This is just an example, you should load your categories dynamically
-                { label: 'Category 1', value: 'c1' },
-                { label: 'Category 2', value: 'c2' },
-                { label: 'Category 3', value: 'c3' },
-                { label: 'Category 4', value: 'c4' },
+            categories: [
+                { label: 'Category 1', value: 'C1' },
+                { label: 'Category 2', value: 'C2' },
+                { label: 'Category 3', value: 'C3' },
+                { label: 'Category 4', value: 'C4' },
             ]
         }
     },
